@@ -10,7 +10,7 @@ package E7GroupEx_assignment;
  */
 public class TestGroupEx {
     public static void main(String[] args){
-        GroupEx mon = new GroupEx(5);
+        GroupEx mon = new GroupEx(3);
         Tester test1 = new Tester(mon);
         Tester test2 = new Tester(mon);
         Tester test3 = new Tester(mon);
