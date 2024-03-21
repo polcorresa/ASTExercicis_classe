@@ -67,10 +67,9 @@ public class GroupEx {
                 hanPassat.signal();
             }
         }
-        
+
         //--------------- SALA ESPERA 3 -------------------------
         //Espera a que quede vacia la sala y ya hayan entrado y salido todos los Threads del bloque
-
         esperantSortida += 1;
         while (!entrant) {
 
@@ -92,7 +91,7 @@ public class GroupEx {
         mon.lock();
         inside -= 1;
 
-        if (inside == 0 && contador%maxThreads == 0) {
+        if (inside == 0 && contador % maxThreads == 0) {
             entrant = true;
             for (int i = 0; i < maxThreads; i++) {
                 hanSortit.signal();
