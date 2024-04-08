@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package E8Broadcast_assignment;
+package E8Broadcast_assignmentv2;
 
 /**
  *
@@ -13,7 +13,7 @@ public class TestMain {
     public static void main(String[] args) {
         Broadcast monitor = new Broadcast(10);
        
-        Sender sender = new Sender(monitor, "Object 1");
+        Sender sender = new Sender(monitor, "5");
         sender.start();
         Receiver receiver0 = new Receiver(monitor, 0);
         receiver0.start();
@@ -44,7 +44,7 @@ public class TestMain {
 
         Receiver receiver9 = new Receiver(monitor, 9);
         receiver9.start();
-        Sender sender2 = new Sender(monitor, "Object 2");
+        Sender sender2 = new Sender(monitor, "10");
         sender2.start();
 
     }

@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package E8Broadcast_assignment;
+package E8Broadcast_assignmentv2;
 
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
@@ -23,7 +23,8 @@ public class Broadcast {
     protected Condition taken = mon.newCondition();
 
     public Broadcast(int N) {
-
+        disponible = new boolean[N];
+        isDisponible = new boolean[N];
         for (int i = 0; i < N; i++) {
             disponible[i] = true;
             isDisponible[i] = false;
