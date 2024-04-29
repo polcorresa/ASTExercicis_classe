@@ -14,10 +14,10 @@ import java.util.logging.Logger;
  * @author polcorresa
  */
 public class Tester extends Thread {
-    protected OneLaneBridge monitor;
+    protected OneLaneBridgeV2 monitor;
     protected boolean sentit;
     
-    public Tester (OneLaneBridge mon, boolean meuSentit){
+    public Tester (OneLaneBridgeV2 mon, boolean meuSentit){
         monitor = mon;
         sentit = meuSentit;
     }
@@ -31,7 +31,7 @@ public class Tester extends Thread {
             Logger.getLogger(Tester.class.getName()).log(Level.SEVERE, null, ex);
     }
         monitor.entrar(sentit);
-        System.out.println("He entrado!"+sentit);
+        
         
         int a = random.nextInt(100, 500);
         try {
@@ -40,7 +40,7 @@ public class Tester extends Thread {
             Logger.getLogger(Tester.class.getName()).log(Level.SEVERE, null, ex);
     }
         monitor.sortir(sentit);
-        System.out.println("He salido!"+sentit);
+        
         
     }
     

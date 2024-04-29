@@ -10,7 +10,7 @@ package E9OneLaneBridge_assignment;
  */
 public class TestOneLaneBridge {
     public static void main(String[] args){
-        OneLaneBridge mon = new OneLaneBridge();
+        OneLaneBridgeV2 mon = new OneLaneBridgeV2();
         Tester test1 = new Tester(mon, true);
         Tester test2 = new Tester(mon, false);
         Tester test3 = new Tester(mon, true);

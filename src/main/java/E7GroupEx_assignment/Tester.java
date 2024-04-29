@@ -13,9 +13,9 @@ import java.util.logging.Logger;
  * @author polcorresa
  */
 public class Tester extends Thread {
-    protected GroupEx monitor;
+    protected GroupExV2 monitor;
     
-    public Tester (GroupEx mon){
+    public Tester (GroupExV2 mon){
         monitor = mon;
     }
     
