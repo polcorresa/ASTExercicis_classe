@@ -4,6 +4,7 @@
  */
 package E8Broadcast_assignmentv2;
 
+import java.util.Arrays;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -17,45 +18,56 @@ public class Broadcast {
     protected Object espai;
 
     protected boolean[] disponible;
-    protected boolean[] isDisponible;
+    protected int agafats;
     protected Lock mon = new ReentrantLock();
-    protected Condition sent = mon.newCondition();
-    protected Condition taken = mon.newCondition();
+    protected Condition potTransmetre = mon.newCondition();
+    protected Condition potRebre = mon.newCondition();
 
     public Broadcast(int N) {
+        agafats = N;
         disponible = new boolean[N];
-        isDisponible = new boolean[N];
         for (int i = 0; i < N; i++) {
-            disponible[i] = true;
-            isDisponible[i] = false;
+            disponible[i] = false;
         }
 
     }
 
     public void putValue(Object objecte) {
-        mon.lock();
+        try {
+            mon.lock();
+            while (agafats < disponible.length) {
+                potTransmetre.awaitUninterruptibly();
+            }
+            //Pot transmetre
+            agafats = 0;
+            for (int i = 0; i < disponible.length; i++) {
+                disponible[i] = true;
+            }
+            espai = objecte;
+            potRebre.signalAll();
 
-        while (!disponible.equals(isDisponible)) {
-            sent.awaitUninterruptibly();
+        } finally {
+            mon.unlock();
         }
-        for (int i = 0; i < disponible.length; i++) {
-            disponible[i] = true;
-        }
-        espai = objecte;
-        taken.signalAll();
-        mon.unlock();
+
     }
 
-    public Object getValue(int i) {
-        mon.lock();
-        while (disponible[i] == false) {
-            taken.awaitUninterruptibly();
-        }
-        disponible[i] = false;
-        sent.signal();
-        Object objecte = espai;
-        mon.unlock();
-        return objecte;
-    }
+    public Object getValue(int id) {
+        try {
+            mon.lock();
+            while (!disponible[id]) {
+                potRebre.awaitUninterruptibly();
+            }
+            //puc rebre
+            agafats++;
+            Object elemNou = espai;
+            disponible[id] = false;
+            potTransmetre.signal();
+            return elemNou;
 
+        } finally {
+            mon.unlock();
+        }
+
+    }
 }

@@ -31,7 +31,7 @@ public class Receiver extends Thread{
             } catch (InterruptedException ex) {
                 Logger.getLogger(Receiver.class.getName()).log(Level.SEVERE, null, ex);
             }
-            mon.getValue(id);
+            this.objecte = mon.getValue(id);
             System.out.println("I'm Thread " + id +"I received: "+objecte.toString());
             
         }
